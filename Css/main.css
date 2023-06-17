@@ -1,0 +1,53 @@
+header .navbar .navbar-brand {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+  margin-right: 0;
+}
+header .navbar .form-control {
+  padding: 0.75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+header .navbar .form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+header .navbar .form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+  background-color: white;
+}
+
+.procut #sidebarMenu {
+  height: 100vh;
+}
+.procut #sidebarMenu .sidebar-sticky .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+.procut main .hocVienTable table tr th {
+  padding-right: 20px;
+}
+.procut .showModal .modal-body label {
+  margin: 10px 0;
+  font-weight: 500;
+}
+.procut .showModal .modal-body #thuocTinhPerson #Student {
+  display: none;
+}
+.procut .showModal .modal-body #thuocTinhPerson #Employee {
+  display: none;
+}
+.procut .showModal .modal-body #thuocTinhPerson #Customer {
+  display: none;
+}
+.procut .showModal .modal-footer #btnCapNhat {
+  display: none;
+}
+.procut .showModal .modal-footer #themThanhVien {
+  display: block;
+}/*# sourceMappingURL=main.css.map */

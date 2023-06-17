@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+
+    <!-- font awsome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <!-- main CSS -->
+    <link rel="stylesheet" href="./Css/main.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
+      >
+        <a class="navbar-brand px-3" href="#">Quản Lí học viên</a>
+        <button
+          class="navbar-toggler position-absolute d-md-none collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#sidebarMenu"
+          aria-controls="sidebarMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <input
+          id="inputSearch"
+          class="form-control form-control-dark w-100 py-2"
+          type="text"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class="procut">
+      <div class="container-fluid">
+        <div class="row">
+          <nav
+            id="sidebarMenu"
+            class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+          >
+            <div class="sidebar-sticky pt-3">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" href="./index.html">
+                    <i class="fa fa-home"></i>
+                    Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./food-list.html">
+                    <i class="fa fa-list"></i>
+                    List Học Viện
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <h2>Danh Sách Học Viện</h2>
+            <!-- Button trigger modal -->
+            <div class="row">
+              <div class="col-8">
+                <button
+                  id="btnThem"
+                  type="button"
+                  class="btn btn-primary my-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  Thêm
+                </button>
+              </div>
+              <div class="col-4">
+                <div class="form-group row">
+                  <label for="selLoai" class="col-sm-2 col-form-label"
+                    >Show</label
+                  >
+                  <div class="col-sm-10">
+                    <select class="custom-select" id="selLoai">
+                      <option selected>Chọn loại</option>
+                      <option value="all">Tất cả</option>
+                      <option value="Student">Student</option>
+                      <option value="Employee">Employee</option>
+                      <option value="Customer">Customer</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive hocVienTable">
+              <table class="table table-striped">
+                <thead>
+                  <tr class="bg-success text-white">
+                    <th>Mã</th>
+                    <th>Họ và Tên</th>
+                    <th>Email</th>
+                    <th>Địa Chỉ</th>
+                    <th>Chức Vụ</th>
+                    <th id="diemTBHV">Điểm Trung Bình</th>
+                    <th id="LuongGV">Lương</th>
+                    <th id="ofCustomer">Tên Công Ty</th>
+                    <th id="ofCustomer">Trị Giá Hóa Đơn</th>
+                    <th id="ofCustomer">Đánh giá</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyHocVien"></tbody>
+              </table>
+            </div>
+          </main>
+        </div>
+      </div>
+
+      <!-- Modal -->
+
+      <!-- Modal -->
+      <div
+        class="modal fade showModal"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fs-5" id="exampleModalLabel">
+                Thêm Người vào Học Viện
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="hocVienForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="personId">Mã Thành Viên</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="personId"
+                      placeholder="Nhập Mã ID"
+                      value=""
+                      required
+                    />
+                    <div id="invalidID" class="invalid-feedback"></div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="tenThanhVien">Họ và Tên</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="tenThanhVien"
+                      placeholder="Nhập Họ và Tên"
+                      required
+                    />
+                    <div id="invalidTen" class="invalid-form"></div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="tenThanhVien">Email</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="email"
+                      placeholder="Nhập Email"
+                      required
+                    />
+                    <div id="invalidTen" class="invalid-form"></div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="tenThanhVien">Địa chỉ</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="adress"
+                      placeholder="Nhập Địa Chỉ"
+                      required
+                    />
+                    <div id="invalidTen" class="invalid-form"></div>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="loai">Loại Thành Viên</label>
+                    <select
+                      class="custom-select d-block w-100"
+                      id="loai"
+                      required
+                    >
+                      <option value="">Chọn loại Thành Viên</option>
+                      <option value="Student">Student</option>
+                      <option value="Employee">Employee</option>
+                      <option value="Customer">Customer</option>
+                    </select>
+                    <div id="invalidLoai" class="invalid-feedback"></div>
+                  </div>
+                </div>
+                <div id="thuocTinhPerson">
+                  <div id="Student">
+                    <label for="giaMon">Điểm Toán</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="diemToan"
+                      placeholder="Nhập Điểm"
+                      value=""
+                      required
+                    />
+                    <label for="giaMon">Điểm Lý</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="diemLy"
+                      placeholder="Nhập Điểm"
+                      value=""
+                      required
+                    />
+                    <label for="giaMon">Điểm Hóa</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="diemHoa"
+                      placeholder="Nhập Điểm"
+                      value=""
+                      required
+                    />
+                  </div>
+                  <div id="Employee">
+                    <label for="giaMon">Số ngày làm việc</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="soNgayLamViec"
+                      placeholder="Nhập Số Ngày Làm Việc"
+                      value=""
+                      required
+                    />
+                    <label for="giaMon">Lương Theo ngày</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="LuongTheoNgay"
+                      placeholder="Nhập Lương"
+                      value=""
+                      required
+                    />
+                  </div>
+                  <div id="Customer">
+                    <label for="giaMon">Tên Công Ty</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="tenCongTy"
+                      placeholder="Nhập Tên Công Ty"
+                      value=""
+                      required
+                    />
+                    <label for="giaMon">Trị Giá hóa Đơn</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="TriGiaHoaDon"
+                      placeholder="Nhập Trị Giá Hóa Đơn"
+                      value=""
+                      required
+                    />
+                    <label for="giaMon">Đánh giá</label>
+                    <select
+                      class="custom-select d-block w-100"
+                      id="danhGia"
+                      required
+                    >
+                      <option value="">Chọn Đánh Giá</option>
+                      <option value="Good">Tốt</option>
+                      <option value="Normal">Khá</option>
+                      <option value="Bad">Không Tốt</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                id="btnClose"
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-warning" id="btnCapNhat">
+                Cập Nhật
+              </button>
+              <button type="button" class="btn btn-primary" id="themThanhVien">
+                Thêm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="./controllers/index.js"></script>
+  </body>
+</html>
