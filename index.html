@@ -89,22 +89,38 @@
             <!-- Button trigger modal -->
             <div class="row">
               <div class="col-8">
-                <button
-                  id="btnThem"
-                  type="button"
-                  class="btn btn-primary my-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Thêm
-                </button>
+                <div class="row">
+                  <div class="col-6">
+                    <button
+                      id="btnThem"
+                      type="button"
+                      class="btn btn-primary my-3"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      Thêm
+                    </button>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group row">
+                      <span for="sapXep" class="col-2 col-form-label"
+                        >Change</span
+                      >
+                      <div class="col-10">
+                        <select class="custom-select" id="sapXep">
+                          <option selected>Chọn loại sắp xếp</option>
+                          <option value="AZ">A-Z</option>
+                          <option value="ZA">Z-A</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="col-4">
                 <div class="form-group row">
-                  <label for="selLoai" class="col-sm-2 col-form-label"
-                    >Show</label
-                  >
-                  <div class="col-sm-10">
+                  <label for="selLoai" class="col-2 col-form-label">Show</label>
+                  <div class="col-10">
                     <select class="custom-select" id="selLoai">
                       <option selected>Chọn loại</option>
                       <option value="all">Tất cả</option>
@@ -129,8 +145,8 @@
                     <th id="diemTBHV">Điểm Trung Bình</th>
                     <th id="LuongGV">Lương</th>
                     <th id="ofCustomer">Tên Công Ty</th>
-                    <th id="ofCustomer">Trị Giá Hóa Đơn</th>
-                    <th id="ofCustomer">Đánh giá</th>
+                    <th id="ofCustomer1">Trị Giá Hóa Đơn</th>
+                    <th id="ofCustomer2">Đánh giá</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -174,10 +190,10 @@
                       class="form-control"
                       id="personId"
                       placeholder="Nhập Mã ID"
-                      value=""
+                      onblur="regexId('personId','checkMaID')"
                       required
                     />
-                    <div id="invalidID" class="invalid-feedback"></div>
+                    <span id="checkMaID" class="checkValid"></span>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="tenThanhVien">Họ và Tên</label>
@@ -186,9 +202,10 @@
                       class="form-control"
                       id="tenThanhVien"
                       placeholder="Nhập Họ và Tên"
+                      onblur="regexName('tenThanhVien','invalidTen')"
                       required
                     />
-                    <div id="invalidTen" class="invalid-form"></div>
+                    <span id="invalidTen" class="checkValid"></span>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="tenThanhVien">Email</label>
@@ -197,9 +214,10 @@
                       class="form-control"
                       id="email"
                       placeholder="Nhập Email"
+                      onblur="regexEmail('email','checkEmail')"
                       required
                     />
-                    <div id="invalidTen" class="invalid-form"></div>
+                    <span id="checkEmail" class="checkValid"></span>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="tenThanhVien">Địa chỉ</label>
@@ -208,15 +226,17 @@
                       class="form-control"
                       id="adress"
                       placeholder="Nhập Địa Chỉ"
+                      onblur="regexName('adress','checkAdress')"
                       required
                     />
-                    <div id="invalidTen" class="invalid-form"></div>
+                    <span id="checkAdress" class="checkValid"></span>
                   </div>
                   <div class="col-md-12 mb-3">
                     <label for="loai">Loại Thành Viên</label>
                     <select
                       class="custom-select d-block w-100"
                       id="loai"
+                      onblur="regexLoai('loai','invalidLoai')"
                       required
                     >
                       <option value="">Chọn loại Thành Viên</option>
@@ -224,12 +244,12 @@
                       <option value="Employee">Employee</option>
                       <option value="Customer">Customer</option>
                     </select>
-                    <div id="invalidLoai" class="invalid-feedback"></div>
+                    <span id="invalidLoai" class="checkValid"></span>
                   </div>
                 </div>
                 <div id="thuocTinhPerson">
                   <div id="Student">
-                    <label for="giaMon">Điểm Toán</label>
+                    <label for="diemToan">Điểm Toán</label>
                     <input
                       type="text"
                       class="form-control"
@@ -237,8 +257,10 @@
                       placeholder="Nhập Điểm"
                       value=""
                       required
+                      onblur="regexdiem('diemToan','checkDiemToan')"
                     />
-                    <label for="giaMon">Điểm Lý</label>
+                    <p id="checkDiemToan" class="checkValid"></p>
+                    <label for="diemLy">Điểm Lý</label>
                     <input
                       type="text"
                       class="form-control"
@@ -246,8 +268,10 @@
                       placeholder="Nhập Điểm"
                       value=""
                       required
+                      onblur="regexdiem('diemLy','checkDiemLy')"
                     />
-                    <label for="giaMon">Điểm Hóa</label>
+                    <p id="checkDiemLy" class="checkValid"></p>
+                    <label for="diemHoa">Điểm Hóa</label>
                     <input
                       type="text"
                       class="form-control"
@@ -255,19 +279,23 @@
                       placeholder="Nhập Điểm"
                       value=""
                       required
+                      onblur="regexdiem('diemHoa','checkDiemHoa')"
                     />
+                    <p id="checkDiemHoa" class="checkValid"></p>
                   </div>
                   <div id="Employee">
-                    <label for="giaMon">Số ngày làm việc</label>
+                    <label for="soNgayLamViec">Số ngày làm việc</label>
                     <input
                       type="text"
                       class="form-control"
                       id="soNgayLamViec"
                       placeholder="Nhập Số Ngày Làm Việc"
                       value=""
+                      onblur="regexDay('soNgayLamViec','checkNgayLamViec')"
                       required
                     />
-                    <label for="giaMon">Lương Theo ngày</label>
+                    <p id="checkNgayLamViec" class="checkValid"></p>
+                    <label for="LuongTheoNgay">Lương Theo ngày</label>
                     <input
                       type="text"
                       class="form-control"
@@ -275,10 +303,12 @@
                       placeholder="Nhập Lương"
                       value=""
                       required
+                      onblur="regexLuong('LuongTheoNgay','checkLuong')"
                     />
+                    <p id="checkLuong" class="checkValid"></p>
                   </div>
                   <div id="Customer">
-                    <label for="giaMon">Tên Công Ty</label>
+                    <label for="tenCongTy">Tên Công Ty</label>
                     <input
                       type="text"
                       class="form-control"
@@ -286,8 +316,10 @@
                       placeholder="Nhập Tên Công Ty"
                       value=""
                       required
+                      onblur="regexTenCongTy('tenCongTy','checkTenCongTy')"
                     />
-                    <label for="giaMon">Trị Giá hóa Đơn</label>
+                    <p id="checkTenCongTy" class="checkValid"></p>
+                    <label for="TriGiaHoaDon">Trị Giá hóa Đơn</label>
                     <input
                       type="text"
                       class="form-control"
@@ -295,18 +327,22 @@
                       placeholder="Nhập Trị Giá Hóa Đơn"
                       value=""
                       required
+                      onblur="regexGiaTriHoaDon('TriGiaHoaDon','checkValueHoaDon')"
                     />
-                    <label for="giaMon">Đánh giá</label>
+                    <p id="checkValueHoaDon" class="checkValid"></p>
+                    <label for="danhGia">Đánh giá</label>
                     <select
                       class="custom-select d-block w-100"
                       id="danhGia"
                       required
+                      onblur="regexDanhGia('danhGia','checkDanhGia')"
                     >
                       <option value="">Chọn Đánh Giá</option>
                       <option value="Good">Tốt</option>
                       <option value="Normal">Khá</option>
                       <option value="Bad">Không Tốt</option>
                     </select>
+                    <p id="checkDanhGia" class="checkValid"></p>
                   </div>
                 </div>
               </form>
@@ -342,6 +378,7 @@
       integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
       crossorigin="anonymous"
     ></script>
+    <script src="./controllers/validation.js"></script>
     <script type="module" src="./controllers/index.js"></script>
   </body>
 </html>

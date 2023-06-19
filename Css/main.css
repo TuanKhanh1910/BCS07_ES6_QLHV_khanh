@@ -45,6 +45,10 @@ header .navbar .form-control-dark:focus {
 .procut .showModal .modal-body #thuocTinhPerson #Customer {
   display: none;
 }
+.procut .showModal .modal-body .checkValid {
+  color: red;
+  font-weight: 500;
+}
 .procut .showModal .modal-footer #btnCapNhat {
   display: none;
 }

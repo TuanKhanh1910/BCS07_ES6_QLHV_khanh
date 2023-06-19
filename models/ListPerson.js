@@ -8,10 +8,12 @@ export default class List {
     this.ListPerson.push(person);
   }
 
-  renderList() {
-    console.log(this.ListPerson);
-
-    let content = this.ListPerson.map((item, index) => {
+  renderList(objArr) {
+    let objcontainer = document.getElementById("tbodyHocVien");
+    // console.log(this.ListPerson);
+    // objArr = this.ListPerson;
+    // let hienThiKetQua = document.getElementById("tbodyHocVien");
+    let content = objArr.map((item, index) => {
       // let person = new ketQua.Person();
       let person = {};
       // let luaChonThanhVien = document.getElementById("loai").value;
@@ -30,8 +32,6 @@ export default class List {
       }
 
       Object.assign(person, item);
-      console.log(item);
-      console.log(person);
       let {
         personId,
         tenThanhVien,
@@ -74,7 +74,8 @@ export default class List {
         </tr>
       `;
     });
-    document.getElementById("tbodyHocVien").innerHTML = content.join("");
+
+    objcontainer.innerHTML = content.join("");
   }
   resetValue() {
     let arrInput = document.querySelectorAll(
@@ -99,15 +100,15 @@ export default class List {
     let perosnLocal = JSON.parse(localStorage.getItem("ListPerson"));
     if (perosnLocal) {
       this.ListPerson = [...perosnLocal];
-      console.log(this.ListPerson);
-      this.renderList();
+      // console.log(this.ListPerson);
+      this.renderList(this.ListPerson);
     }
   }
   deletePerson(personId) {
     let index = this.ListPerson.findIndex((item) => item.personId == personId);
     if (index != -1) {
       this.ListPerson.splice(index, 1);
-      this.renderList();
+      this.renderList(this.ListPerson);
       this.saveLocal();
     }
   }
@@ -159,25 +160,39 @@ export default class List {
     );
     if (index != -1) {
       this.ListPerson[index] = person;
-      this.renderList();
+      this.renderList(this.ListPerson);
       this.saveLocal();
       document.getElementById("btnClose").click();
     }
   }
-  showTungLoaiPerson() {
-    let loaiPerson = document.getElementById("selLoai").value;
 
+  showTungLoaiPerson() {
+    // let objcontainer = document.getElementById("tbodyHocVien");
+    let loaiPerson = document.getElementById("selLoai").value;
+    let ketQuaSort = this.ListPerson.filter((person) => {
+      return person.loai == loaiPerson;
+    });
+    console.log(ketQuaSort);
+    console.log(loaiPerson);
     if (loaiPerson == "all") {
-      console.log("all");
+      this.renderList(this.ListPerson);
+    } else {
+      this.renderList(ketQuaSort);
+      console.log(this.renderList(ketQuaSort));
     }
-    if (loaiPerson == "Student") {
-      console.log("student nè");
-    }
-    if (loaiPerson == "Employee") {
-      console.log("Employee nè");
-    }
-    if (loaiPerson == "Customer") {
-      console.log("Customer nè");
-    }
+  }
+  sapXepKiTu() {
+    let value = document.getElementById("sapXep").value;
+    console.log(value);
+    this.ListPerson.sort((a, b) => {
+      if (value === "AZ") {
+        return a.tenThanhVien.localeCompare(b.tenThanhVien);
+      }
+      if (value === "ZA") {
+        return b.tenThanhVien.localeCompare(a.tenThanhVien);
+      }
+    });
+    this.renderList(this.ListPerson);
+    console.log(this.ListPerson);
   }
 }

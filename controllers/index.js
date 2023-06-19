@@ -33,6 +33,25 @@ let list = new List();
 list.getLocal();
 
 document.getElementById("themThanhVien").addEventListener("click", () => {
+  let valid = true;
+  valid =
+    regexId("personId", "checkMaID") &
+    regexEmail("email", "checkEmail") &
+    regexName("tenThanhVien", "invalidTen") &
+    regexName("adress", "checkAdress") &
+    regexdiem("diemToan", "checkDiemToan") &
+    regexdiem("diemLy", "checkDiemLy") &
+    regexdiem("diemHoa", "checkDiemHoa") &
+    regexLoai("loai", "invalidLoai") &
+    regexDay("soNgayLamViec", "checkNgayLamViec") &
+    regexLuong("LuongTheoNgay", "checkLuong") &
+    regexTenCongTy("tenCongTy", "checkTenCongTy") &
+    regexGiaTriHoaDon("TriGiaHoaDon", "checkValueHoaDon") &
+    regexDanhGia("danhGia", "checkDanhGia");
+
+  if (!valid) {
+    return;
+  }
   // lấy dữ liệu người dùng
   let arrInput = document.querySelectorAll(
     "#hocVienForm input, #hocVienForm select"
@@ -60,8 +79,9 @@ document.getElementById("themThanhVien").addEventListener("click", () => {
   // console.log(person);
   list.themThanhVien(person);
   console.log(list.ListPerson);
-  list.renderList();
+  list.renderList(list.ListPerson);
   list.saveLocal();
+  // list.sortName();
   document.getElementById("btnClose").click();
   list.resetValue();
 });
@@ -101,4 +121,7 @@ document.getElementById("btnCapNhat").onclick = () => {
 };
 document.getElementById("selLoai").addEventListener("change", () => {
   list.showTungLoaiPerson();
+});
+document.getElementById("sapXep").addEventListener("change", () => {
+  list.sapXepKiTu();
 });

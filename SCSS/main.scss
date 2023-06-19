@@ -63,6 +63,11 @@ header {
           display: none;
         }
       }
+      .checkValid {
+        color: red;
+        // margin-top: 2px;
+        font-weight: 500;
+      }
     }
     .modal-footer {
       #btnCapNhat {
